@@ -40,7 +40,8 @@ namespace FrontEnd.Controllers
         public async Task<ActionResult> PubAsync()
         {
             var data = new WeatherForecast();
-            await _daprClient.PublishEventAsync<WeatherForecast>("pubsub", "test_topic", data);
+            //await _daprClient.PublishEventAsync<WeatherForecast>("pubsub", "test_topic", data);
+            await _daprClient.PublishEventAsync<WeatherForecast>("rabbitmq-pubsub", "test_topic", data);
             return Ok();
         }
 
@@ -55,6 +56,7 @@ namespace FrontEnd.Controllers
             return Ok();
         }
 
+        //编程式的订阅
         //[Topic(PUB_SUN, TOPIC_NAME)]
         //[HttpPost("subcode")]
         //public async Task<ActionResult> Sub()
